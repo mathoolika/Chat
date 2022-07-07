@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mathoolikavasigaran.chat">
 
+<<<<<<< Updated upstream
+=======
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+>>>>>>> Stashed changes
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

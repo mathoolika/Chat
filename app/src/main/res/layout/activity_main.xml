@@ -29,12 +29,11 @@
         android:text="@string/connect" />
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_below="@+id/connect"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="1dp"
         android:background="@android:color/darker_gray" />
 
@@ -42,7 +41,7 @@
         android:id="@+id/msgTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listview"
+        android:layout_below="@+id/list"
         android:layout_marginStart="20dp"
         android:layout_marginTop="39dp"
         android:hint="@string/msgTitle"
@@ -53,7 +52,7 @@
         android:id="@+id/msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listview"
+        android:layout_below="@+id/list"
         android:layout_marginStart="40dp"
         android:layout_marginTop="86dp"
         android:hint="@string/message"
@@ -103,7 +102,7 @@
         android:id="@+id/search"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_above="@+id/listview"
+        android:layout_above="@+id/list"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="1dp"
         android:text="@string/search" />
