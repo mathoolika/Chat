@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Chat</string>
+    <string name="search">Search</string>
+    <string name="send">Send</string>
+    <string name="status">Status</string>
+    <string name="message">Message</string>
+    <string name="msgTitle">MESSAGES:</string>
+    <string name="connect">Connect</string>
+    <string name="title">CHAT APP</string>
 </resources>
