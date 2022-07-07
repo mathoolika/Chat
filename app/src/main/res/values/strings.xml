@@ -7,4 +7,6 @@
     <string name="msgTitle">MESSAGES:</string>
     <string name="connect">Connect</string>
     <string name="title">CHAT APP</string>
+    <string name="paired_devices">paired_devices</string>
+    <string name="available_devices">available_devices</string>
 </resources>
