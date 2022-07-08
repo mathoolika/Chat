@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter btAdapter;
     private BluetoothDevice[] btDevice;
     private Context context;
-    Receive receive;
+    private Receive receive;
     private BluetoothSocket bluetoothSocket;
     private InputStream inputStream;
     private OutputStream outputStream;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_alert)
+                .setSmallIcon(R.drawable.chaticon)
                 .setContentTitle("New Message")
                 .setContentText("You received a new message.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
