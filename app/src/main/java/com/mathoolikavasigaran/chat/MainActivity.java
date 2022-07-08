@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private EditText space;
     private BluetoothAdapter btAdapter;
-    private BluetoothDevice[] btDevice;
+    private BluetoothManager btManager;
     private Context context;
     private Receive receive;
     private BluetoothSocket bluetoothSocket;
     private InputStream inputStream;
     private OutputStream outputStream;
+    private Set<BluetoothDevice> btDevice;
+    private BluetoothDevice btArray[];
 
     private static final String CHANNEL_ID = "defaultChannel";
     private static final String CHANNEL_NAME = "Default Channel";
@@ -87,11 +91,21 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.send);
         button.setOnClickListener(v -> sendNotification());
 
+        btManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+        btAdapter = btManager.getAdapter();
+
+        searchBtn.setOnClickListener(view -> searchDevices());
+
         this.notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    private void searchDevices() {
+
     }
 
     private void sendNotification() {
@@ -130,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ClientClass clientClass = new ClientClass(btDevice[i]);
+                ClientClass clientClass = new ClientClass(btArray[i]);
                 clientClass.start();
 
                 status.setText("Connecting");
@@ -150,11 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class ServerClass extends Thread {
         private BluetoothServerSocket serverSocket;
-
-        public ServerClass() {
-            return;
-        }
-
         public void run() {
             BluetoothSocket socket = null;
 
@@ -207,8 +216,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class Receive extends Thread {
-
-
         public Receive(BluetoothSocket socket) {
             bluetoothSocket = socket;
             InputStream tempIn = null;
@@ -220,7 +227,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             inputStream = tempIn;
             outputStream = tempOut;
         }
